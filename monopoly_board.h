@@ -87,6 +87,19 @@ class CircularLinkedList {
             }
     int size() const { return nodeCount; }
 
+    int addMany(const vector<T>& values) {
+            int added = 0;
+
+            for (const T& v : values) {
+                if (!addSpace(v)) {
+                    break;
+                }
+                added++;
+            }
+
+            return added;
+        }
+
     void printFromPlayer(int count) const {
             if (count <= 0) return;
 
