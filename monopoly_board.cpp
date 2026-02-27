@@ -24,7 +24,7 @@ bool MonopolySpace::isEqual(MonopolySpace other) {
     return propertyName == other.propertyName;
 }
 
-void MonopolySpace::print() {
+void MonopolySpace::print() const {
     cout << propertyName << " | " << propertyColor
          << " | $" << value << " | Rent " << rent << endl;
 }
@@ -36,5 +36,8 @@ int main() {
     cout << (board.addSpace(MonopolySpace("Mediterranean Avenue", "Brown", 60, 2)) ? "Added Med" : "Failed Med") << endl;
 
     cout << "Board size: " << board.size() << endl;
+    cout << "\n Board view from player (next 5 spaces):\n";
+    board.printFromPlayer(5);
+
     return 0;
 }

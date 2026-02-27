@@ -28,7 +28,7 @@ class MonopolySpace {
     MonopolySpace(string propertyName, string propertyColor, int value, int rent);
 
     bool isEqual(MonopolySpace other);
-    void print();
+    void print() const;
 };
 
 // ------------------------------------
@@ -87,5 +87,20 @@ class CircularLinkedList {
             }
     int size() const { return nodeCount; }
 
+    void printFromPlayer(int count) const {
+            if (count <= 0) return;
+
+            if (playerNode == nullptr) {
+                cout << "[Board is empty]\n";
+                return;
+            }
+
+            const Node<T>* cur = playerNode;
+
+            for (int i = 0; i < count; i++) {
+                cur->data.print();
+                cur = cur->nextNode;
+            }
+        }
 };
 #endif //MONOPOLY_BOARD_MONOPOLY_BOARD_H
