@@ -100,6 +100,22 @@ class CircularLinkedList {
             return added;
         }
 
+    void movePlayer(int steps) {
+            if (steps <= 0) return;
+            if (playerNode == nullptr || headNode == nullptr || tailNode == nullptr) return;
+
+            for (int i = 0; i < steps; i++) {
+                //passing GO when we move from tail to head
+                if (playerNode == tailNode) {
+                    passGoCount++;
+                }
+                playerNode = playerNode->nextNode;
+            }
+        }
+    int getPassGoCount() const {
+            return passGoCount;
+        }
+
     void printFromPlayer(int count) const {
             if (count <= 0) return;
 
