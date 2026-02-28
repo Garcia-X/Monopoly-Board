@@ -2,6 +2,8 @@
 // Created by axavi on 2/25/2026.
 
 #include "monopoly_board.h"
+#include <cstdlib>
+#include <ctime>
 
 // -------------------------------
 // MonopolySpace definitions
@@ -81,6 +83,10 @@ static vector<MonopolySpace> buildStandardBoard() {
     return s;
 }
 
+static int rollDice2to12() {
+    return (rand() % 6 + 1) + (rand() % 6 + 1);
+}
+
 int main() {
     CircularLinkedList<MonopolySpace> board;
 
@@ -101,6 +107,18 @@ int main() {
     cout << "Board size after attempt: " << board.size() << endl;
     cout << "\nBoard view from player (next 45 spaces):\n";
     board.printFromPlayer(45);
+
+    for (int turn = 1; turn <= 10; turn++) {
+        int roll = rollDice2to12();
+
+        cout << "\nTurn " << turn << " | Rolled: " << roll << endl;
+        board.movePlayer(roll);
+
+        cout << "Landed on: ";
+        board.printFromPlayer(1);
+
+        cout << "Times passed GO so far: " << board.getPassGoCount() << endl;
+    }
 
     return 0;
 }
