@@ -47,3 +47,15 @@
 **What I tried:** Built the 40-space board, ran 10 simulated turns with dice rolls (2–12), printed the landed space each turn, and watched the pass GO counter.  
 **Fix / resolution:** Confirmed the player lands on the expected spaces after each roll and passGoCount increments when movement crosses from tail to head (observed passGoCount increase during the turn loop).  
 **Commit(s):** a8820a5
+
+---
+
+## Entry 5
+**Date:** 2026-03-04  
+**Entry Type:** Engineering Decision  
+**Task worked on:** Code quality cleanup (warnings and const-correctness)  
+**Issue or decision:** CLion flagged repeated warnings about unnecessary copying and missing const qualifiers.  
+**Error message / symptom:** Warnings like “Parameter is copied for each invocation, consider passing by const reference” and “Member function can be made const.”  
+**What I tried:** Reviewed the warnings and identified which functions were safe to mark const and which parameters could be passed by const reference.  
+**Fix / resolution:** Updated `MonopolySpace` constructor to take `const string&`, changed `isEqual` to take `const MonopolySpace&` and marked it `const`, and made `MAX_SPACES` `constexpr`. Verified program output stayed the same.  
+**Commit(s):** ce27b87
