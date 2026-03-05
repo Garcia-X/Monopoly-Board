@@ -102,6 +102,11 @@ int main() {
     cout << "Spaces added: " << added << endl;
     cout << "Board size: " << board.size() << endl;
 
+    cout << "countSpaces() check: " << board.countSpaces() << endl;
+
+    cout << "\nprintBoardOnce() check (prints all spaces once):\n";
+    board.printBoardOnce();
+
     cout << "\nBoard view from player (next 12 spaces):\n";
     board.printFromPlayer(12);
 
@@ -125,6 +130,14 @@ int main() {
 
         cout << "Times passed GO so far: " << board.getPassGoCount() << endl;
     }
+
+    cout << "\nClearing board...\n";
+    board.clear();
+    cout << "After clear - size(): " << board.size()
+         << " | countSpaces(): " << board.countSpaces() << endl;
+
+    cout << "printFromPlayer after clear:\n";
+    board.printFromPlayer(3);
 
     return 0;
 }

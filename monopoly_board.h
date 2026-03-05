@@ -131,6 +131,63 @@ public:
             cur = cur->nextNode;
         }
     }
+
+    // Cleanup: prevent memory leaks
+    ~CircularLinkedList() {
+        clear();
+    }
+
+    // Edge-case helper: countSpaces O(n)
+    int countSpaces() const {
+        if (headNode == nullptr) return 0;
+
+        int count = 0;
+        const Node<T>* cur = headNode;
+
+        do {
+            count++;
+            cur = cur->nextNode;
+        } while (cur != headNode);
+
+        return count;
+    }
+
+    // Optional helper: print full board once
+    void printBoardOnce() const {
+        if (headNode == nullptr) {
+            cout << "[Board is empty]\n";
+            return;
+        }
+
+        const Node<T>* cur = headNode;
+
+        do {
+            cur->data.print();
+            cur = cur->nextNode;
+        } while (cur != headNode);
+    }
+
+    // Cleanup: delete all nodes safely
+    void clear() {
+        if (headNode == nullptr) return;
+
+        // why: break the cycle so deletion terminates
+        tailNode->nextNode = nullptr;
+
+        Node<T>* cur = headNode;
+        while (cur != nullptr) {
+            Node<T>* toDelete = cur;
+            cur = cur->nextNode;
+            delete toDelete;
+        }
+
+        headNode = nullptr;
+        tailNode = nullptr;
+        playerNode = nullptr;
+        nodeCount = 0;
+        passGoCount = 0;
+    }
+
 };
 
 #endif // MONOPOLY_BOARD_MONOPOLY_BOARD_H

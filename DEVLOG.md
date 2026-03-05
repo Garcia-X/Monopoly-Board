@@ -59,3 +59,19 @@
 **What I tried:** Reviewed the warnings and identified which functions were safe to mark const and which parameters could be passed by const reference.  
 **Fix / resolution:** Updated `MonopolySpace` constructor to take `const string&`, changed `isEqual` to take `const MonopolySpace&` and marked it `const`, and made `MAX_SPACES` `constexpr`. Verified program output stayed the same.  
 **Commit(s):** ce27b87
+
+---
+
+## Entry 6
+**Date:** 2026-03-05 
+**Entry Type:** Edge Case / Testing Entry  
+**Task worked on:** Edge-case helpers + safe cleanup for the circular linked list  
+**Issue or decision:** Needed safe one-cycle traversal utilities and a cleanup method to avoid memory leaks and handle empty-board operations correctly.  
+**Error message / symptom:** N/A (behavior/testing validation)  
+**What I tried:** Built a full 40-space board, ran `countSpaces()` and `printBoardOnce()`, then called `clear()` and re-tested size/count/printing on an empty board.  
+**Fix / resolution:**
+- `countSpaces()` returned 40 on the full board and 0 after `clear()`.
+- `printBoardOnce()` printed all 40 spaces exactly once (no infinite loop).
+- `clear()` deleted all nodes safely by breaking the cycle first, resetting pointers/counters, and `printFromPlayer()` correctly reported `[Board is empty]` afterward.  
+
+**Commit(s):** 
