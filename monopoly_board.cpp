@@ -1,7 +1,10 @@
+// ================================
 // File: monopoly_board.cpp
 // Created by axavi on 2/25/2026.
+// ================================
 
 #include "monopoly_board.h"
+
 #include <cstdlib>
 #include <ctime>
 
@@ -15,14 +18,14 @@ MonopolySpace::MonopolySpace() {
     rent = 0;
 }
 
-MonopolySpace::MonopolySpace(string propertyName, string propertyColor, int value, int rent) {
+MonopolySpace::MonopolySpace(const string& propertyName, const string& propertyColor, int value, int rent) {
     this->propertyName = propertyName;
     this->propertyColor = propertyColor;
     this->value = value;
     this->rent = rent;
 }
 
-bool MonopolySpace::isEqual(MonopolySpace other) {
+bool MonopolySpace::isEqual(const MonopolySpace& other) const {
     return propertyName == other.propertyName;
 }
 
@@ -88,6 +91,8 @@ static int rollDice2to12() {
 }
 
 int main() {
+    srand(static_cast<unsigned>(time(nullptr)));
+
     CircularLinkedList<MonopolySpace> board;
 
     vector<MonopolySpace> spaces = buildStandardBoard();
@@ -101,10 +106,11 @@ int main() {
     board.printFromPlayer(12);
 
     cout << "\nAttempt to add a 41st space: "
-     << (board.addSpace(MonopolySpace("Extra Space", "None", 0, 0)) ? "success" : "rejected")
-     << endl;
+         << (board.addSpace(MonopolySpace("Extra Space", "None", 0, 0)) ? "success" : "rejected")
+         << endl;
 
     cout << "Board size after attempt: " << board.size() << endl;
+
     cout << "\nBoard view from player (next 45 spaces):\n";
     board.printFromPlayer(45);
 
