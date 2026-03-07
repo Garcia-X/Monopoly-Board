@@ -132,12 +132,73 @@ public:
         }
     }
 
-    // Cleanup: prevent memory leaks
-    ~CircularLinkedList() {
-        clear();
+    // -------------------------------
+    // Advanced Option A
+    // -------------------------------
+    bool removeByName(const string& name) {
+        if (headNode == nullptr) return false;
+
+        Node<T>* cur = headNode;
+        Node<T>* prev = tailNode;
+
+        do {
+            if (cur->data.propertyName == name) {
+                if (nodeCount == 1) {
+                    delete cur;
+                    headNode = nullptr;
+                    tailNode = nullptr;
+                    playerNode = nullptr;
+                    nodeCount = 0;
+                    passGoCount = 0;
+                    return true;
+                }
+
+                prev->nextNode = cur->nextNode;
+
+                if (cur == headNode) {
+                    headNode = cur->nextNode;
+                }
+                if (cur == tailNode) {
+                    tailNode = prev;
+                }
+
+                tailNode->nextNode = headNode;
+
+                if (playerNode == cur) {
+                    playerNode = cur->nextNode;
+                }
+
+                delete cur;
+                nodeCount--;
+                return true;
+            }
+
+            prev = cur;
+            cur = cur->nextNode;
+        } while (cur != headNode);
+
+        return false;
     }
 
-    // Edge-case helper: countSpaces O(n)
+    vector<string> findByColor(const string& color) const {
+        vector<string> matches;
+        if (headNode == nullptr) return matches;
+
+        const Node<T>* cur = headNode;
+
+        do {
+            if (cur->data.propertyColor == color) {
+                matches.push_back(cur->data.propertyName);
+            }
+            cur = cur->nextNode;
+        } while (cur != headNode);
+
+        return matches;
+    }
+
+    // -------------------------------
+    // Edge-case helpers
+    // -------------------------------
     int countSpaces() const {
         if (headNode == nullptr) return 0;
 
@@ -152,7 +213,6 @@ public:
         return count;
     }
 
-    // Optional helper: print full board once
     void printBoardOnce() const {
         if (headNode == nullptr) {
             cout << "[Board is empty]\n";
@@ -167,7 +227,6 @@ public:
         } while (cur != headNode);
     }
 
-    // Cleanup: delete all nodes safely
     void clear() {
         if (headNode == nullptr) return;
 
@@ -188,6 +247,10 @@ public:
         passGoCount = 0;
     }
 
+    // Cleanup: prevent memory leaks
+    ~CircularLinkedList() {
+        clear();
+    }
 };
 
 #endif // MONOPOLY_BOARD_MONOPOLY_BOARD_H

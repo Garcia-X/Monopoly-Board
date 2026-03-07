@@ -93,6 +93,8 @@ static int rollDice2to12() {
 int main() {
     srand(static_cast<unsigned>(time(nullptr)));
 
+    const bool DEBUG = false; // set true only when debugging
+
     CircularLinkedList<MonopolySpace> board;
 
     vector<MonopolySpace> spaces = buildStandardBoard();
@@ -102,23 +104,43 @@ int main() {
     cout << "Spaces added: " << added << endl;
     cout << "Board size: " << board.size() << endl;
 
-    cout << "countSpaces() check: " << board.countSpaces() << endl;
+    if (DEBUG) {
+        cout << "countSpaces() check: " << board.countSpaces() << endl;
 
-    cout << "\nprintBoardOnce() check (prints all spaces once):\n";
-    board.printBoardOnce();
+        cout << "\nprintBoardOnce() check (prints all spaces once):\n";
+        board.printBoardOnce();
 
-    cout << "\nBoard view from player (next 12 spaces):\n";
-    board.printFromPlayer(12);
+        cout << "\nBoard view from player (next 12 spaces):\n";
+        board.printFromPlayer(12);
 
-    cout << "\nAttempt to add a 41st space: "
-         << (board.addSpace(MonopolySpace("Extra Space", "None", 0, 0)) ? "success" : "rejected")
-         << endl;
+        cout << "\nAttempt to add a 41st space: "
+             << (board.addSpace(MonopolySpace("Extra Space", "None", 0, 0)) ? "success" : "rejected")
+             << endl;
 
-    cout << "Board size after attempt: " << board.size() << endl;
+        cout << "Board size after attempt: " << board.size() << endl;
 
-    cout << "\nBoard view from player (next 45 spaces):\n";
-    board.printFromPlayer(45);
+        cout << "\nBoard view from player (next 45 spaces):\n";
+        board.printFromPlayer(45);
 
+        cout << "\nfindByColor(\"Brown\") test:\n";
+        vector<string> browns = board.findByColor("Brown");
+        for (const string& name : browns) {
+            cout << "  " << name << endl;
+        }
+
+        cout << "\nremoveByName(\"GO\") test: "
+             << (board.removeByName("GO") ? "removed" : "not found") << endl;
+        cout << "Board size after removing GO: " << board.size() << endl;
+
+        cout << "\nremoveByName(\"Boardwalk\") test: "
+             << (board.removeByName("Boardwalk") ? "removed" : "not found") << endl;
+        cout << "Board size after removing Boardwalk: " << board.size() << endl;
+
+        cout << "\nprintBoardOnce() after removals:\n";
+        board.printBoardOnce();
+    }
+
+    // Playable Traversal Loop
     for (int turn = 1; turn <= 10; turn++) {
         int roll = rollDice2to12();
 
@@ -131,13 +153,15 @@ int main() {
         cout << "Times passed GO so far: " << board.getPassGoCount() << endl;
     }
 
-    cout << "\nClearing board...\n";
-    board.clear();
-    cout << "After clear - size(): " << board.size()
-         << " | countSpaces(): " << board.countSpaces() << endl;
+    if (DEBUG) {
+        cout << "\nClearing board...\n";
+        board.clear();
+        cout << "After clear - size(): " << board.size()
+             << " | countSpaces(): " << board.countSpaces() << endl;
 
-    cout << "printFromPlayer after clear:\n";
-    board.printFromPlayer(3);
+        cout << "printFromPlayer after clear:\n";
+        board.printFromPlayer(3);
+    }
 
     return 0;
 }

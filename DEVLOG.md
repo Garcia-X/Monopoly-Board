@@ -1,5 +1,6 @@
 ## Entry 1
 **Date:** 2026-02-25  
+
 **Entry Type:** Engineering Decision  
 **Task worked on:** Project setup + file organization  
 **Issue or decision:** How to split code between .h and .cpp  
@@ -12,6 +13,7 @@
 
 ## Entry 2
 **Date:** 2026-02-26  
+
 **Entry Type:** Bug Fix  
 **Task worked on:** CMake / CLion build configuration  
 **Issue or decision:** CLion said the file didn’t belong to a target / CMake couldn’t find main.cpp  
@@ -24,6 +26,7 @@
 
 ## Entry 3
 **Date:** 2026-02-27  
+
 **Entry Type:** Edge Case / Testing Entry  
 **Task worked on:** Full 40-space board construction using addMany + verifying circular traversal  
 **Issue or decision:** Needed to confirm the board never exceeds 40 nodes and traversal wraps correctly.  
@@ -39,7 +42,8 @@
 ---
 
 ## Entry 4
-**Date:** 2026-02-28  
+**Date:** 2026-02-28 
+
 **Entry Type:** Edge Case / Testing Entry  
 **Task worked on:** Core C movePlayer traversal + playable turn loop  
 **Issue or decision:** Needed to confirm player movement is node-by-node, wraps correctly, and counts passing GO (tail → head).  
@@ -51,7 +55,8 @@
 ---
 
 ## Entry 5
-**Date:** 2026-03-04  
+**Date:** 2026-03-04 
+
 **Entry Type:** Engineering Decision  
 **Task worked on:** Code quality cleanup (warnings and const-correctness)  
 **Issue or decision:** CLion flagged repeated warnings about unnecessary copying and missing const qualifiers.  
@@ -63,7 +68,8 @@
 ---
 
 ## Entry 6
-**Date:** 2026-03-05 
+**Date:** 2026-03-05
+
 **Entry Type:** Edge Case / Testing Entry  
 **Task worked on:** Edge-case helpers + safe cleanup for the circular linked list  
 **Issue or decision:** Needed safe one-cycle traversal utilities and a cleanup method to avoid memory leaks and handle empty-board operations correctly.  
@@ -73,5 +79,27 @@
 - `countSpaces()` returned 40 on the full board and 0 after `clear()`.
 - `printBoardOnce()` printed all 40 spaces exactly once (no infinite loop).
 - `clear()` deleted all nodes safely by breaking the cycle first, resetting pointers/counters, and `printFromPlayer()` correctly reported `[Board is empty]` afterward.  
+
+**Commit(s):** 
+
+---
+
+## Entry 7
+**Date:** 2026-03-06
+
+**Entry Type:** Edge Case / Testing Entry  
+**Task worked on:** Added `findByColor()` and `removeByName()` and tested them using DEBUG output.  
+**Issue or decision:** I needed to make sure my board traversal still worked after deleting spaces, and that the circular links didn’t break.  
+**Error message / symptom:** N/A  
+**What I tried:** Turned `DEBUG=true` and ran tests to:
+- list all spaces with color `"Brown"`
+- remove `"GO"` (first node / head)
+- remove `"Boardwalk"` (last node / tail)
+- print the board once after removals to confirm it still loops correctly  
+  **Fix / resolution:**
+- `findByColor("Brown")` returned **Mediterranean Avenue** and **Baltic Avenue**.
+- Removing `"GO"` dropped the board size from **40 → 39**.
+- Removing `"Boardwalk"` dropped the board size from **39 → 38**.
+- `printBoardOnce()` printed all remaining spaces once and stopped normally (no infinite loop), so the ring stayed intact.
 
 **Commit(s):** 
