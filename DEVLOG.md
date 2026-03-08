@@ -80,7 +80,7 @@
 - `printBoardOnce()` printed all 40 spaces exactly once (no infinite loop).
 - `clear()` deleted all nodes safely by breaking the cycle first, resetting pointers/counters, and `printFromPlayer()` correctly reported `[Board is empty]` afterward.  
 
-**Commit(s):** 
+**Commit(s):** c69c61a
 
 ---
 
@@ -102,4 +102,19 @@
 - Removing `"Boardwalk"` dropped the board size from **39 → 38**.
 - `printBoardOnce()` printed all remaining spaces once and stopped normally (no infinite loop), so the ring stayed intact.
 
-**Commit(s):** 
+**Commit(s):** 9ac1ab6
+
+---
+
+## Entry 8
+**Date:** 2026-03-07  
+**Entry Type:** Edge Case / Testing Entry  
+**Task worked on:** Final submission prep (README + DEVLOG + final run)  
+**Issue or decision:** Needed to ensure the repo documentation matches the final program behavior and the project runs cleanly with DEBUG disabled.  
+**Error message / symptom:** N/A  
+**What I tried:**
+- Reviewed README sections against the assignment rubric (build/run, data structures, function list, traversal logic, 40-space limit).
+- Updated DEVLOG commit hashes where missing.
+- Ran the program with `DEBUG=false` to confirm the normal simulation output is readable and deterministic in structure (10 turns, landed space, pass GO count).  
+  **Fix / resolution:** README and DEVLOG now match the final implementation, and the program runs successfully in its submission configuration.  
+  **Commit(s):** 
