@@ -1,4 +1,4 @@
-# Monopoly Board Simulator (Spring 2026)
+# Monopoly Board Simulator 
 
 This project simulates a simplified Monopoly-style board using a circular linked list.
 The list is used for pointer-based traversal (moving the player around the ring),
