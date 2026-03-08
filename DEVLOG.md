@@ -117,4 +117,4 @@
 - Updated DEVLOG commit hashes where missing.
 - Ran the program with `DEBUG=false` to confirm the normal simulation output is readable and deterministic in structure (10 turns, landed space, pass GO count).  
   **Fix / resolution:** README and DEVLOG now match the final implementation, and the program runs successfully in its submission configuration.  
-  **Commit(s):** e6390c7
+  **Commit(s):** 
